@@ -40,7 +40,7 @@ cd chart
  * helm list
  * kubectl get get all
 ```
-#### 6. Unistall helm chart
+#### 6. Uninstall helm chart
 ```
 ./helm uninstall test
 ```
@@ -59,7 +59,7 @@ https://github.com/farrukh90/artemis/tree/master
  ```
  * docker image build -t "artemis repo from GCP"/artemis:2.0.0 .
 
- * docker push "artemis repo from GCP"/artemis:2.0.0 .
+ * docker push "artemis repo from GCP"/artemis:2.0.0 
 
  * git chekout 2.0.0
  ```
@@ -68,6 +68,4 @@ https://github.com/farrukh90/artemis/tree/master
  
  <img width="472" alt="Screenshot 2023-04-04 at 8 08 18 PM" src="https://user-images.githubusercontent.com/80778542/229955726-b10d0635-e9c8-4c60-b94b-b76e22e8097b.png">
 
-
-
-
+ 
