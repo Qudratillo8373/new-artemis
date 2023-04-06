@@ -10,14 +10,23 @@ Pre Build process be fore you deploy the application please open port 5000 on Se
 yum install python-pip -y
 pip install Flask
 ```
-### If you are installing the helm for the first time, you can follow these steps.
 
-1. Read helm compatibility 
+
+## To check if helm is installed in the system please run below commands:
+
+```
+helm version
+```
+
+## If above command responds with an error output, please follow the instructions listed below
+
+
+### 1. Read helm compatibility 
 ```
 https://helm.sh/docs/topics/version_skew/
 ```
 
-#### 2. Install helm to your repository
+### 2. Install helm to your repository
 ```
 wget https://get.helm.sh/helm-v3.7.2-linux-amd64.tar.gz
 tar xzvf helm-v3.7.2-linux-amd64.tar.gz
@@ -26,21 +35,21 @@ mv linux-amd64/helm charts/
 cd chart
 ```
 
-#### 3. Create helm chart for application
+### 3. Create helm chart for application
 ```
 ./helm create application
 ```
 
-#### 4. Install test helm chart
+### 4. Install test helm chart
 ```
 ./helm install test application
 ```
-#### 5. Verify
+### 5. Verify
 ```
  * helm list
- * kubectl get get all
+ * kubectl get all
 ```
-#### 6. Uninstall helm chart
+### 6. Uninstall helm chart
 ```
 ./helm uninstall test
 ```
