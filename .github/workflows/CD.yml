@@ -1,11 +1,14 @@
 env:
-  repo:         "https://github.com/farrukh90/artemis.git"
-  app_version:  "2.0.0"
-  project_id:   "terr-380812"
-  repo_region:  "us-central1"
-  app_name:     "artemis"
+  repo:              "https://github.com/farrukh90/artemis.git"
+  app_version:       "2.0.0"
+  repo_region:       "us-central1"
+  project_id:        "terr-380812"
+  app_name:          "artemis"
+  tag_new_version:   "${GITHUB_SHA}"
 
-name: ContinuousDelivery
+
+name: CI
+
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -24,64 +27,40 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-
-      # Runs a set of commands using the runners shell
+      
       - name: Clone a repo
         run: |
-          git clone ${{ env.repo }}
+          git clone "${{ env.repo }}"
 
 
-      # Runs a set of commands using the runners shell
-      - name: Switch Branches
+      - name: Checkout branch
         working-directory: ${{ env.app_name }}
         run: |
-          git checkout ${{ env.app_version }}
-          ls -l
+          git checkout "${{ env.app_version }}"
 
-
-
-      # Runs a set of commands using the runners shell
       - name: Build Image
         working-directory: ${{ env.app_name }}
         run: |
-          docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
+          docker build  -t  ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}  . 
 
 
-      # Runs a set of commands using the runners shell
-      - name: Tag Image
-        working-directory: ${{ env.app_name }}
-        run: |
-          docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.app_version }}     
-
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: gcloud version 
-
-
-
-      - name: Authenticate to Google account
-        run: |
-          gcloud auth activate-service-account --key-file="service-account.json"
-          gcloud config set project ${{ env.project_id }}
-
+      # Authenticate to GCP
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
 
 
       - name: Authenticate to repository
         run: |
           gcloud auth configure-docker  ${{ env.repo_region }}-docker.pkg.dev
 
-          
-
-
-      # Runs a set of commands using the runners shell
-      - name: Image push
+      - name: Docker push
         working-directory: ${{ env.app_name }}
         run: |
-          docker push ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.app_version }}  
+          docker push  ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}  
