@@ -15,7 +15,7 @@ replicaCount: 1
 image:
   ####### Please change repository direction #######
   repository: "us-central1-docker.pkg.dev/terr-380812/artemis/artemis"
-  tag: "2.0.0"
+  tag: "3.0.0"
 
 service:
   type: ClusterIP
