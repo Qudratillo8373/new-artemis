@@ -2,7 +2,7 @@ env:
   repo:              "https://github.com/farrukh90/artemis.git"
   app_version:       "2.0.0"
   repo_region:       "us-central1"
-  project_id:        "terr-380812"
+  project_id:        "project-infrastructure-388501"
   app_name:          "artemis"
   tag_new_version:   "${GITHUB_SHA}"
 
