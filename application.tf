@@ -14,7 +14,7 @@ replicaCount: 1
 
 image:
   ####### Please change repository direction #######
-  repository: "us-central1-docker.pkg.dev/terr-380812/artemis/artemis"
+  repository: "us-central1-docker.pkg.dev/project-infrastructure-388501/artemis/artemis"
   tag: "1.0.0"
 
 service:
