@@ -14,13 +14,8 @@ replicaCount: 1
 
 image:
   ####### Please change repository direction #######
-<<<<<<< HEAD
   repository: "us-central1-docker.pkg.dev/project-infrastructure-388501/artemis/artemis"
-  tag: "3.0.0"
-=======
-  repository: "us-central1-docker.pkg.dev/terr-380812/artemis/artemis"
-  tag: "main"
->>>>>>> 0f65fef8be1bc9df9daa29d34685b42c4ccb1842
+  tag: "10.0.0"
 
 service:
   type: ClusterIP
